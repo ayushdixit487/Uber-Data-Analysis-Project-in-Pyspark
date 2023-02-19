@@ -1,4 +1,6 @@
 # Uber-Data-Analysis-Project-in-Pyspark
+<img width="374" alt="image" src="https://user-images.githubusercontent.com/25612446/219968335-5e40c842-56cd-4f87-97b8-bb304a8a4c69.png">
+
 This data project can be used as a take-home assignment to learn Pyspark and Data Engineering.
 
 ## Insights from City Supply and Demand Data
