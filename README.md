@@ -214,6 +214,27 @@ requests_per_driver.orderBy(F.desc('requests_per_driver')).show(1)
 
 This will output the hour with the highest requests per unique driver ratio, which is where we should add 5 drivers.
 
+- Looking at the data from all two weeks, which time might make the most sense to consider a true "end day" instead of midnight? (i.e when are supply and demand at both their natural minimums)
+
+One way to approach this question is to calculate the average number of completed trips and unique drivers for each hour of the day over the entire two-week period. We can then look for the hour with the lowest number of completed trips and unique drivers to find the time when supply and demand are at their natural minimums.
+We can use the following PySpark code to calculate the average number of completed trips and unique drivers for each hour:
+
+```python
+# Calculate average completed trips and unique drivers for each hour
+avg_trips_and_drivers = (df.groupBy('Time (Local)').agg(
+    F.mean('Completed Trips').alias('avg_completed_trips'),
+    F.mean('Unique Drivers').alias('avg_unique_drivers')
+))
+
+# Show the hour with the lowest average completed trips and unique drivers
+avg_trips_and_drivers.orderBy('avg_completed_trips', 'avg_unique_drivers').show(1)
+```
+
+This will output the hour with the lowest average number of completed trips and unique drivers, which is when supply and demand are at their natural minimums and might make the most sense to consider as the "end day".
+
+
+
+
 
 
 
