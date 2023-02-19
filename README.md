@@ -167,3 +167,11 @@ busiest_8_consecutive_hours.show()
 ```
 This will output the busiest 8 consecutive hours in terms of unique requests, along with the number of unique requests during that time period.
 
+
+- True or False: Driver supply always increases when demand increases during the two-week period.
+
+This statement is false. There are multiple reasons why driver supply might not always increase when demand increases. For example, some drivers might choose not to work during peak demand times, or there might be external factors that affect driver availability (such as traffic, weather conditions, or events in the city). To confirm this, we would need to analyze the data and identify instances where demand increased but driver supply did not.
+
+
+
+
