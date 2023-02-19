@@ -123,3 +123,20 @@ print("The percentage of zeros that occurred on weekends is:", percent_weekend_z
 #The percentage of zeros that occurred on weekends is: 41.333414829040026 %
 ```
 
+- What is the weighted average ratio of completed trips per driver during the two-week period?
+
+To answer this question, we need to calculate the ratio of completed trips to unique drivers for each hour, multiply the ratio by the total number of completed trips for that hour, and then sum the results. We can then divide this sum by the total number of completed trips for the entire period.
+
+```python
+from pyspark.sql.functions import avg
+
+weighted_avg = df.withColumn("completed_per_driver", df["Completed Trips"] / df["Unique Drivers"]) \
+                 .groupBy("Date", "Time (Local)") \
+                 .agg(avg("completed_per_driver").alias("avg_completed_per_driver"), sum("Completed Trips").alias("total_completed_trips")) \
+                 .withColumn("weighted_ratio", col("avg_completed_per_driver") * col("total_completed_trips")) \
+                 .agg(sum("weighted_ratio") / sum("total_completed_trips")).collect()[0][0]
+
+print("The weighted average ratio of completed trips per driver is:", weighted_avg)
+
+#Output: The weighted average ratio of completed trips per driver is: 1.2869201507713425
+```
