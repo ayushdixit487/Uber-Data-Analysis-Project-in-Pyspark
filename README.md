@@ -173,5 +173,29 @@ This will output the busiest 8 consecutive hours in terms of unique requests, al
 This statement is false. There are multiple reasons why driver supply might not always increase when demand increases. For example, some drivers might choose not to work during peak demand times, or there might be external factors that affect driver availability (such as traffic, weather conditions, or events in the city). To confirm this, we would need to analyze the data and identify instances where demand increased but driver supply did not.
 
 
+- In which 72-hour period is the ratio of Zeroes to Eyeballs the highest?
+
+To answer this question, we can group the data by 72-hour periods and calculate the ratio of zeroes to eyeballs for each period. We can then find the period with the highest ratio. Here's the code:
+
+```python
+from pyspark.sql.functions import col, sum
+
+# Group the data by 72-hour periods and calculate the ratio of zeroes to eyeballs for each period
+period_ratios = (df
+  .groupBy(((col("Date").cast("timestamp").cast("long") / (72*3600)).cast("int")).alias("period"))
+  .agg(sum("Zeroes").alias("zeroes"), sum("Eyeballs").alias("eyeballs"))
+  .withColumn("ratio", col("zeroes") / col("eyeballs"))
+)
+
+# Find the period with the highest ratio
+highest_ratio_period = period_ratios.orderBy(col("ratio").desc()).limit(1)
+
+# Print the result
+highest_ratio_period.show()
+```
+
+This will output the 72-hour period with the highest ratio of zeroes to eyeballs.
+
+
 
 
