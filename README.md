@@ -90,5 +90,19 @@ print(highest_completed_trips_in_24_hours)
 
 #Output 2102
 ```
+- Which hour of the day had the most requests during the two-week period?
+
+To answer this question, we need to group the data by an hour and sum the "Requests" column for each hour. We can then sort the result by the sum of requests and select the hour with the highest sum.
+
+```python
+from pyspark.sql.functions import hour, sum
+
+hourly_requests = df.groupBy(hour("Time (Local)").alias("hour")).agg(sum("Requests").alias("total_requests")).orderBy("total_requests", ascending=False)
+
+most_requested_hour = hourly_requests.select("hour").first()[0]
+print("The hour with the most requests is:", most_requested_hour)
+
+#The hour with the most requests is: 17
+```
 
 
