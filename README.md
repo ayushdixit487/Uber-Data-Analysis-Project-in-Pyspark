@@ -105,4 +105,21 @@ print("The hour with the most requests is:", most_requested_hour)
 #The hour with the most requests is: 17
 ```
 
+- What percentages of all zeroes during the two-week period occurred on weekends (Friday at 5 pm to Sunday at 3 am)?
+
+To answer this question, we need to filter the data to select only the rows that fall within the specified time range, count the total number of zeros, and count the number of zeros that occurred on weekends. We can then calculate the percentage of zeros that occurred on weekends.
+
+```python
+from pyspark.sql.functions import dayofweek, hour
+
+weekend_zeros = df.filter((hour("Time (Local)") >= 17) | (hour("Time (Local)") < 3)).filter((dayofweek("Date") == 6) | (dayofweek("Date") == 7)).agg(sum("Zeroes").alias("weekend_zeros")).collect()[0]["weekend_zeros"]
+
+total_zeros = df.agg(sum("Zeroes").alias("total_zeros")).collect()[0]["total_zeros"]
+
+percent_weekend_zeros = weekend_zeros / total_zeros * 100
+
+print("The percentage of zeros that occurred on weekends is:", percent_weekend_zeros, "%")
+
+#The percentage of zeros that occurred on weekends is: 41.333414829040026 %
+```
 
