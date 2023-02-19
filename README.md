@@ -233,6 +233,11 @@ avg_trips_and_drivers.orderBy('avg_completed_trips', 'avg_unique_drivers').show(
 This will output the hour with the lowest average number of completed trips and unique drivers, which is when supply and demand are at their natural minimums and might make the most sense to consider as the "end day".
 
 
+### Connect with me:
+
+[<img src="https://img.icons8.com/color/48/000000/stackoverflow.png" width="6.5%"/>](https://stackoverflow.com/users/9249743/ayush-dixit) [<img src="https://img.icons8.com/color/48/000000/linkedin.png" width="6.5%"/>](www.linkedin.com/in/ayush-dixit-856067104) [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/leetcode.svg" width="6.5%"/>](https://leetcode.com/ayushdixit661/) [<img src="https://img.icons8.com/fluent/48/000000/google-plus.png" width="6.5%"/>](ayushdixit661@gmail.com) [<img src="https://img.icons8.com/fluent/48/000000/github.png" width="6.5%" alt="Github">](https://github.com/ayushdixit487/)
+
+
 
 
 
