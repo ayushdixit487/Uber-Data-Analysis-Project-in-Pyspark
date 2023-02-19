@@ -196,6 +196,25 @@ highest_ratio_period.show()
 
 This will output the 72-hour period with the highest ratio of zeroes to eyeballs.
 
+- If you could add 5 drivers to any single hour of every day during the two-week period, which hour should you add them to? Hint: Consider both rider eyeballs and driver supply when choosing.
+
+
+To determine which hour to add 5 drivers too, we want to look for an hour where there are a high number of rider eyeballs and a low number of unique drivers. One way to approach this is to calculate the ratio of requests to unique drivers for each hour and then choose the hour with the highest ratio. The idea here is that adding more drivers to an hour with a high ratio will result in more completed trips.
+We can use the following PySpark code to calculate the ratio for each hour:
+
+```python
+# Calculate requests per unique driver for each hour
+requests_per_driver = (df.groupBy('Time (Local)').agg(
+    (F.sum('Requests') / F.countDistinct('Unique Drivers')).alias('requests_per_driver'))
+)
+
+# Show the hour with the highest ratio
+requests_per_driver.orderBy(F.desc('requests_per_driver')).show(1)
+```
+
+This will output the hour with the highest requests per unique driver ratio, which is where we should add 5 drivers.
+
+
 
 
 
